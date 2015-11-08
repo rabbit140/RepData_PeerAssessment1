@@ -142,6 +142,8 @@ mean_steps[which.max(mean_steps$mean),]
 
 ###4. Imputing missing values
 
+Imputing missing data is done by assigning to all NA values the mean of appropriate interval (as given by "mean_steps" variable).
+
 Load the dataset once again so that it is raw, downloaded data and get the number of missing values:
 
 ```r
@@ -238,7 +240,11 @@ activity_weekday_summary <- group_by(activity_data, interval, weekday) %>% summa
 Now, we can make the plot itself:
 
 ```r
-xyplot(data = activity_weekday_summary, mean ~ interval | weekday, type = "l", col = "steelblue2", xlab = "Interval", ylab = "Mean number of steps per day")
+xyplot(data = activity_weekday_summary, mean ~ interval | weekday, 
+       type = "l", 
+       col = "steelblue2", 
+       xlab = "Interval", 
+       ylab = "Mean number of steps per day")
 ```
 
 ![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21-1.png) 

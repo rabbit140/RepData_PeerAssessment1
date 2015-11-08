@@ -315,6 +315,8 @@ h + geom_line(col = &quot;steelblue3&quot;) + xlab(&quot;Interval&quot;) + ylab(
 
 <p>###4. Imputing missing values</p>
 
+<p>Imputing missing data is done by assigning to all NA values the mean of appropriate interval (as given by &ldquo;mean_steps&rdquo; variable).</p>
+
 <p>Load the dataset once again so that it is raw, downloaded data and get the number of missing values:</p>
 
 <pre><code class="r">activity_data &lt;- read.csv(&quot;activity.csv&quot;)
