@@ -1,6 +1,5 @@
 ---
 title: "Reproducible Research - Course Project 1"
-author: "Przemyslaw Zientala"
 output:
   html_document:
     toc: true
@@ -14,11 +13,11 @@ This assignment makes use of data from a personal activity monitoring device. Th
 
 #Dataset
 The data for this assignment can be downloaded from the course web site:
-
+      
 [Dataset: Activity monitoring data](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip) [52K]
 
 The variables included in this dataset are:
-
+      
 * steps: Number of steps taking in a 5-minute interval (missing values are coded as NA)
 
 * date: The date on which the measurement was taken in YYYY-MM-DD format
@@ -48,8 +47,7 @@ library(lattice)
 ```
 
 
-Download the data if not already downloaded and then load it
-
+Download the data if not already downloaded and then load it:
 
 ```r
 if(!file.exists("activity.csv")){
@@ -144,7 +142,7 @@ mean_steps[which.max(mean_steps$mean),]
 
 ###4. Imputing missing values
 
-Load the dataset once again so that it's raw, downloaded data and get the number of missiong values:
+Load the dataset once again so that it is raw, downloaded data and get the number of missing values:
 
 ```r
 activity_data <- read.csv("activity.csv")
@@ -159,13 +157,13 @@ Fill in the NAs with mean for each interval:
 
 ```r
 for(i in 1:dim(activity_data)[1]){
-      
-      if(is.na(activity_data[i, 1])){
-            current_interval <- activity_data[i,3]
-            interval_mean <- subset(mean_steps, interval == current_interval)[2]
-            interval_mean <- interval_mean$mean
-            activity_data[i,1] <- interval_mean
-      }
+
+if(is.na(activity_data[i, 1])){
+current_interval <- activity_data[i,3]
+interval_mean <- subset(mean_steps, interval == current_interval)[2]
+interval_mean <- interval_mean$mean
+activity_data[i,1] <- interval_mean
+}
 }
 ```
 
@@ -180,10 +178,10 @@ Finally, plot the data:
 ```r
 i <- ggplot(summary_nona, aes(sum))
 i + geom_histogram(binwidth = 2500, 
-                   color = "darkblue", 
-                   fill = "steelblue") + 
-      xlab("Sum of steps") + 
-      ylab("Frequency")
+color = "darkblue", 
+fill = "steelblue") + 
+xlab("Sum of steps") + 
+ylab("Frequency")
 ```
 
 ![plot of chunk unnamed-chunk-15](figure/unnamed-chunk-15-1.png) 
@@ -222,12 +220,12 @@ Next, add column with labels indicating whether a given day is a weekday or week
 ```r
 activity_data$weekday <- weekdays(activity_data$date)
 for(i in 1:length(activity_data$date)){
-    
-    if(activity_data$weekday[i] == "Saturday" | activity_data$weekday[i] == "Sunday"){
-        activity_data$weekday[i] <- "weekend"
-    }else{
-        activity_data$weekday[i] <- "weekday"
-    }
+
+if(activity_data$weekday[i] == "Saturday" | activity_data$weekday[i] == "Sunday"){
+activity_data$weekday[i] <- "weekend"
+}else{
+activity_data$weekday[i] <- "weekday"
+}
 }
 ```
 
